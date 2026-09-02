@@ -1,8 +1,9 @@
 export function getInventoryValue(
   inventory: Array<[string, number, number]>,
 ): number {
-  let minimum = 5;
-  const greater = inventory.filter(quantity => minimum);
-  const sum = inventory.reduce((quantity, price) => quantity * price);
-  return 0;
+  return inventory
+    .filter(([, quantity]) => quantity > 5)
+    .reduce((total, [, quantity, pricePerUnit]) => {
+      return total + quantity * pricePerUnit;
+    }, 0);
 }
